@@ -1,0 +1,47 @@
+# A股情绪监控系统配置
+
+# 目录
+dirs:
+  data: data
+  reports: reports
+  logs: logs
+
+# 数据拉取
+fetch:
+  retry_attempts: 3       # 每个接口最大重试次数
+  retry_delay: 2.0        # 首次重试间隔(秒)，之后指数退避
+  request_gap: 1.5        # 接口间隔(秒)，避免高频触发限制
+  refresh_interval: 600   # 日内刷新间隔(秒)，默认10分钟
+
+# 情绪评分参数（分子标准化基准，可按市场周期调整）
+emotion:
+  limit_up_base: 150      # 涨停数满分基准
+  board_height_base: 8    # 连板高度满分基准
+  twenty_cm_base: 30      # 20cm涨停满分基准
+  amount_ratio_cap: 1.5   # 成交额比值上限
+  up_down_ratio_cap: 2.0  # 涨跌家数比上限
+  limit_down_base: 80     # 跌停扣分基准
+
+# 手动题材映射（后续 Phase 3 使用）
+theme_manual_map:
+  宏昌电子: [AI PCB材料, 树脂]
+  圣泉集团: [AI PCB材料, 树脂]
+  同宇新材: [AI PCB材料, PPO/PPE]
+  风华高科: [MLCC]
+  三环集团: [MLCC]
+  麦捷科技: [电感]
+  顺络电子: [电感]
+  泰晶科技: [晶振]
+  雅克科技: [HBM, 半导体材料]
+  长电科技: [HBM, 先进封装]
+  长飞光纤: [光通信]
+  东方锆业: [小金属]
+  四方达: [培育钻石散热]
+
+# 持仓配置（后续 Phase 5 使用）
+portfolio:
+  - code: "603002"
+    name: 宏昌电子
+    cost: 24.50
+    position_pct: 0.20
+    themes: [AI PCB材料, 树脂]
